@@ -89,7 +89,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.androidx.paging.runtime)
 
     // Compose
     implementation(libs.androidx.compose.ui)
@@ -100,8 +99,9 @@ dependencies {
 
     // Retrofit
     implementation(libs.retrofit)
-    implementation(libs.retrofit.gson.converter)
     implementation(libs.okhttp)
+    implementation(libs.retrofit.moshi)
+    ksp(libs.moshi.codegen)
 
     // Image loading
     implementation(libs.coil.image.loading)

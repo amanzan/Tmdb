@@ -18,6 +18,7 @@ junit = "4.13.2"
 kotlin = "2.1.0"
 ksp = "2.1.0-1.0.29"
 mockk = "1.13.8"
+moshi = "1.14.0"
 okhttp = "4.12.0"
 retrofit = "2.11.0"
 retrofit-gson = "2.11.0"
@@ -54,8 +55,9 @@ mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 mockk-instrumentation = { module = "io.mockk:mockk-android", version.ref = "mockk" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-retrofit-gson-converter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit-gson" }
-androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime", version = "3.3.6" }
+retrofit-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+moshi-core = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+moshi-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
