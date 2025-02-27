@@ -1,8 +1,8 @@
 package com.bragi.tmdb.data.remote.model
 
-import com.squareup.moshi.Json
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class MoviesResponseDto(
-    @Json(name = "results")
     val results: List<MovieDto>
 )

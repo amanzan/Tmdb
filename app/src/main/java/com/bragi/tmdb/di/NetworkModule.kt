@@ -1,15 +1,18 @@
 package com.bragi.tmdb.di
 
+import android.util.Log
 import com.bragi.tmdb.data.remote.TmdbApiService
-import com.squareup.moshi.Moshi
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -22,16 +25,22 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
-        val apiKeyInterceptor = Interceptor { chain ->
+        val authInterceptor = Interceptor { chain ->
             val original = chain.request()
-            val url = original.url.newBuilder()
-                .addQueryParameter("api_key", API_KEY)
+            val request = original.newBuilder()
+                .addHeader("Authorization", "Bearer ${API_KEY}") // Use your actual Bearer token here
+                .addHeader("accept", "application/json")
                 .build()
-            val request = original.newBuilder().url(url).build()
             chain.proceed(request)
         }
+        val loggingInterceptor = HttpLoggingInterceptor { message ->
+            Log.d("OkHttp", message)
+        }.apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
         return OkHttpClient.Builder()
-            .addInterceptor(apiKeyInterceptor)
+            .addInterceptor(authInterceptor)
+            .addInterceptor(loggingInterceptor)
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .build()
@@ -40,10 +49,16 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideTmdbApiService(okHttpClient: OkHttpClient): TmdbApiService {
+        val json = Json {
+            ignoreUnknownKeys = true
+            coerceInputValues = true
+        }
+        val contentType = "application/json".toMediaType()
+
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder().build()))
+            .addConverterFactory(json.asConverterFactory(contentType))
             .build()
             .create(TmdbApiService::class.java)
     }

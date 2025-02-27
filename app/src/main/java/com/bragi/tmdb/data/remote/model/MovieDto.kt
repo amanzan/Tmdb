@@ -1,13 +1,14 @@
 package com.bragi.tmdb.data.remote.model
 
-import com.squareup.moshi.Json
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class MovieDto(
     val id: Int,
-    @Json(name = "title")
     val title: String,
-    @Json(name = "poster_path")
+    @SerialName("poster_path")
     val posterPath: String?,
-    @Json(name = "vote_average")
+    @SerialName("vote_average")
     val rating: Double
 )

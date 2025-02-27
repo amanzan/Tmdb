@@ -3,8 +3,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.hilt.gradle)
-    alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -51,15 +51,15 @@ android {
         shaders = false
     }
 
-//    packagingOptions {
-//        resources {
-//            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-//            pickFirsts += "META-INF/LICENSE.md"
-//            pickFirsts += "META-INF/LICENSE.txt"
-//            pickFirsts += "META-INF/DEPENDENCIES"
-//            pickFirsts += "META-INF/LICENSE-notice.md"
-//        }
-//    }
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            pickFirsts += "META-INF/LICENSE.md"
+            pickFirsts += "META-INF/LICENSE.txt"
+            pickFirsts += "META-INF/DEPENDENCIES"
+            pickFirsts += "META-INF/LICENSE-notice.md"
+        }
+    }
 }
 
 dependencies {
@@ -97,11 +97,12 @@ dependencies {
     // Tooling
     debugImplementation(libs.androidx.compose.ui.tooling)
 
-    // Retrofit
+    // Retrofit, OkHttp and Kotlin Serialization
     implementation(libs.retrofit)
     implementation(libs.okhttp)
-    implementation(libs.retrofit.moshi)
-    ksp(libs.moshi.codegen)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit.kotlinx.serialization.converter)
 
     // Image loading
     implementation(libs.coil.image.loading)
