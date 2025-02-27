@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.bragi.tmdb.presentation.common.ErrorScreen
 import com.bragi.tmdb.presentation.filters.SharedFilterViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -69,8 +70,9 @@ fun MoviesScreen(
                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 }
                 is MovieUiState.Error -> {
-                    Text(
-                        text = (uiState as MovieUiState.Error).message,
+                    ErrorScreen(
+                        message = (uiState as MovieUiState.Error).message,
+                        onRetry = { viewModel.loadMovies() },
                         modifier = Modifier.align(Alignment.Center)
                     )
                 }

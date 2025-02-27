@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.bragi.tmdb.domain.model.Genre
+import com.bragi.tmdb.presentation.common.ErrorScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,8 +48,9 @@ fun FiltersScreen(
                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 }
                 is FiltersUiState.Error -> {
-                    Text(
-                        text = (uiState as FiltersUiState.Error).message,
+                    ErrorScreen(
+                        message = (uiState as FiltersUiState.Error).message,
+                        onRetry = { filtersViewModel.loadGenres() },
                         modifier = Modifier.align(Alignment.Center)
                     )
                 }

@@ -1,4 +1,4 @@
-package com.bragi.tmdb.presentation.ui.theme
+package com.bragi.tmdb.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

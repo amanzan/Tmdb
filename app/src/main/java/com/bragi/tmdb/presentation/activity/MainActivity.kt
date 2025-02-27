@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import com.bragi.tmdb.presentation.navigation.AppNavHost
-import com.bragi.tmdb.presentation.ui.theme.TmdbTheme
+import com.bragi.tmdb.presentation.theme.TmdbTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

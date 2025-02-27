@@ -1,4 +1,4 @@
-package com.bragi.tmdb.presentation.ui.theme
+package com.bragi.tmdb.presentation.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
