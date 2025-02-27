@@ -1,7 +1,7 @@
 package com.bragi.tmdb.data.repository
 
 import android.util.Log
-import com.bragi.tmdb.data.remote.TmdbApiService
+import com.bragi.tmdb.data.remote.service.TmdbApiService
 import com.bragi.tmdb.domain.model.Genre
 import com.bragi.tmdb.domain.model.Movie
 import com.bragi.tmdb.domain.repository.MovieRepository
@@ -13,7 +13,6 @@ class MovieRepositoryImpl(
     private val apiService: TmdbApiService
 ) : MovieRepository {
 
-    // Retry mechanism: 30-second timeout and up to 3 attempts
     private suspend fun <T> retryWithTimeout(
         times: Int = 3,
         timeoutMillis: Long = 30000,
@@ -39,14 +38,13 @@ class MovieRepositoryImpl(
     override suspend fun getMovies(genreId: Int?): List<Movie> {
         val genreParam = if (genreId != null && genreId != 0) genreId.toString() else null
         val moviesResponse = retryWithTimeout { apiService.discoverMovies(withGenres = genreParam) }
-        // For each movie, fetch details concurrently
         return coroutineScope {
             moviesResponse.results.map { movieDto ->
                 async {
                     val details = try {
                         retryWithTimeout { apiService.getMovieDetails(movieDto.id) }
                     } catch (e: Exception) {
-                        null // Fallback in case of error
+                        null
                     }
                     Movie(
                         id = movieDto.id,

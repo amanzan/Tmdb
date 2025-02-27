@@ -9,6 +9,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SharedFilterViewModel @Inject constructor() : ViewModel() {
-    // Default to "All" (using 0 as the id for "All")
     var selectedGenreId by mutableStateOf(0)
+    var selectedGenreName by mutableStateOf("All")
 }

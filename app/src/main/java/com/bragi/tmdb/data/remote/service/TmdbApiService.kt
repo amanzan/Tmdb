@@ -1,4 +1,4 @@
-package com.bragi.tmdb.data.remote
+package com.bragi.tmdb.data.remote.service
 
 import com.bragi.tmdb.data.remote.model.GenreResponseDto
 import com.bragi.tmdb.data.remote.model.MovieDetailsResponseDto

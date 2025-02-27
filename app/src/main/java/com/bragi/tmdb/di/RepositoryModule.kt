@@ -1,6 +1,6 @@
 package com.bragi.tmdb.di
 
-import com.bragi.tmdb.data.remote.TmdbApiService
+import com.bragi.tmdb.data.remote.service.TmdbApiService
 import com.bragi.tmdb.data.repository.MovieRepositoryImpl
 import com.bragi.tmdb.domain.repository.MovieRepository
 import dagger.Module

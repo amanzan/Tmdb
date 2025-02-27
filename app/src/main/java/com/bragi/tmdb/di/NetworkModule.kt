@@ -1,7 +1,7 @@
 package com.bragi.tmdb.di
 
 import android.util.Log
-import com.bragi.tmdb.data.remote.TmdbApiService
+import com.bragi.tmdb.data.remote.service.TmdbApiService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -28,7 +28,7 @@ object NetworkModule {
         val authInterceptor = Interceptor { chain ->
             val original = chain.request()
             val request = original.newBuilder()
-                .addHeader("Authorization", "Bearer ${API_KEY}") // Use your actual Bearer token here
+                .addHeader("Authorization", "Bearer ${API_KEY}")
                 .addHeader("accept", "application/json")
                 .build()
             chain.proceed(request)

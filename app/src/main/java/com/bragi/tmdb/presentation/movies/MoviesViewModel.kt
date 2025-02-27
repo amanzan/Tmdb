@@ -2,7 +2,6 @@ package com.bragi.tmdb.presentation.movies
 
 
 import android.util.Log
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bragi.tmdb.domain.model.Movie
@@ -28,7 +27,6 @@ class MoviesViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<MovieUiState>(MovieUiState.Loading)
     val uiState: StateFlow<MovieUiState> = _uiState.asStateFlow()
 
-    // Selected genre filter (null or 0 means "All")
     var selectedGenreId: Int? = null
 
     fun loadMovies() {

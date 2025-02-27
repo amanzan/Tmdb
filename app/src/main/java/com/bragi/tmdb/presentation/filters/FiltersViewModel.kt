@@ -1,6 +1,5 @@
 package com.bragi.tmdb.presentation.filters
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bragi.tmdb.domain.model.Genre
@@ -30,11 +29,9 @@ class FiltersViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.value = FiltersUiState.Loading
             try {
-                // Prepend an "All" option (id 0) to the list of genres
                 val genresList = listOf(Genre(0, "All")) + getGenresUseCase()
                 _uiState.value = FiltersUiState.Success(genresList)
             } catch (e: Exception) {
-                // Optionally log the error: Log.e("FiltersViewModel", "Error loading filters", e)
                 _uiState.value = FiltersUiState.Error("Error loading filters. Please check your connection.")
             }
         }
