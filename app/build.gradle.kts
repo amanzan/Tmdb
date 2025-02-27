@@ -103,6 +103,7 @@ dependencies {
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit.kotlinx.serialization.converter)
+    testImplementation(libs.okhttp.mock.web.server)
 
     // Image loading
     implementation(libs.coil.image.loading)

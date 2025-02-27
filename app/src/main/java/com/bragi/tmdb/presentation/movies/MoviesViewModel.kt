@@ -36,7 +36,6 @@ class MoviesViewModel @Inject constructor(
                 val movies = getMoviesUseCase(selectedGenreId)
                 _uiState.value = MovieUiState.Success(movies)
             } catch (e: Exception) {
-                Log.e("MoviesViewModel", "Error loading movies", e)
                 _uiState.value = MovieUiState.Error("Error loading movies. Please check your connection.")
             }
         }

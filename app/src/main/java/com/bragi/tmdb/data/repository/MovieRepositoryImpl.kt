@@ -23,7 +23,6 @@ class MovieRepositoryImpl(
             try {
                 return withTimeout(timeoutMillis) { block() }
             } catch (e: Exception) {
-                Log.e("Retry", "Attempt ${times + 1} failed: ${e.message}")
                 lastException = e
             }
         }
